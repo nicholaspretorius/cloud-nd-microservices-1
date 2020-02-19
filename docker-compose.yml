@@ -4,7 +4,7 @@ services:
   restapi-user:
     build:
       context: ./udacity-c3-restapi-user
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     volumes:
       - ./udacity-c3-restapi-user:/usr/src/app
     ports:
@@ -25,7 +25,7 @@ services:
   restapi-feed:
     build:
       context: ./udacity-c3-restapi-feed
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     volumes:
       - ./udacity-c3-restapi-feed:/usr/src/app
     ports:
@@ -46,7 +46,7 @@ services:
   db:
     build:
       context: ./db
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     expose:
       - 5432
     environment:
@@ -67,6 +67,7 @@ services:
       - db
   reverseproxy:
     build:
-      context: ./udacity-c3-deployment/dockerfile
+      context: ./udacity-c3-deployment/docker
       dockerfile: Dockerfile
-    ports: 8080
+    ports:
+      - 8080
