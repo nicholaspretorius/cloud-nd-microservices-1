@@ -1,4 +1,4 @@
-FROM node:12
+FROM node:13.6.0-alpine 
 
 WORKDIR /usr/src/app
 
@@ -8,6 +8,6 @@ RUN npm ci
 
 COPY . .
 
-EXPOSE 8080
+EXPOSE 8082
 
 CMD ["npm", "run", "dev"]
