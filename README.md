@@ -15,8 +15,8 @@ To run the application, from the command line, run:
 * `\l` to list the databases
 * `\c db` to connect to the database
 * `\dt` to list the relations, you should see tables for `User` and `FeedItem`
-* `select * from User;` will return all values in the Users table, there should not be any
-* `select * from FeedItem;` will return all values in the FeedItem table, there should not be any
+* `SELECT * FROM "User";` will return all values in the Users table, there should not be any
+* `SELECT * FROM "FeedItem";` will return all values in the FeedItem table, there should not be any
 
 
 
