@@ -1,4 +1,4 @@
-FROM beevelop/ionic
+FROM beevelop/ionic as builder
 
 WORKDIR /usr/src/app
 
@@ -10,4 +10,8 @@ RUN npm ci
 
 COPY . .
 
-CMD ["ionic", "serve", "--external"]
+CMD ["ionic", "build"]
+
+FROM nginx:alpine
+
+COPY --from=builder /usr/src/app/www /usr/share/nginx/html
