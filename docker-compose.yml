@@ -56,19 +56,19 @@ services:
       - AWS_PROFILE=${AWS_PROFILE}
     depends_on:
       - users-feed-db
-  #   client:
-  #     build:
-  #       context: ./udacity-c3-frontend
-  #       dockerfile: Dockerfile
-  #     volumes:
-  #       - "./udacity-c3-frontend:/usr/src/app"
-  #       - "/usr/src/app/node_modules"
-  #     ports:
-  #       - 8000:8000
-  #     environment:
-  #       - NODE_ENV=development
-  #     depends_on:
-  #       - users-feed-db
+  client:
+    build:
+      context: ./udacity-c3-frontend
+      dockerfile: Dockerfile
+    volumes:
+      - "./udacity-c3-frontend:/usr/src/app"
+      - "/usr/src/app/node_modules"
+    ports:
+      - 8100:8100
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - users-feed-db
 #   reverseproxy:
 #     build:
 #       context: ./udacity-c3-deployment/docker

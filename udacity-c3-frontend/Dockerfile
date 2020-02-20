@@ -1,4 +1,4 @@
-FROM node:12
+FROM beevelop/ionic
 
 WORKDIR /usr/src/app
 
@@ -10,6 +10,4 @@ RUN npm ci
 
 COPY . .
 
-EXPOSE 8000
-
-CMD ["npm", "start"]
+CMD ["ionic", "serve", "--external"]
