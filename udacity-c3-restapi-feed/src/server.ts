@@ -27,7 +27,7 @@ import { V0MODELS } from './controllers/v0/model.index';
 
   // Root URI call
   app.get("/", async (req, res) => {
-    res.json({ message: "/api/v0/" });
+    res.json({ service: "feed", message: "/api/v0/" });
   });
 
 
