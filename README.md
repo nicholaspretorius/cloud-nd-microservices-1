@@ -6,6 +6,10 @@ Taking the Udacity Cloud Developer Nanodegree Project 2 and converting the monol
 
 To run the application, from the command line, run: 
 * `docker-compose up --build` to run the apps
+* `docker ps` to see running containers, note the name of the container you want to access
+* `docker exec -it microservices1_client_1 bash` to access bash on client service
+* `curl http://localhost:8100` to get what is running on localhost:8100 in that container
+* `exit` to exit bash on the running container
 * `docker-compose down` to stop the apps
 * `docker-compose exec users-feed-db pswl -U postgres` to connect to the DB via PSQL
 * `\l` to list the databases
