@@ -26,13 +26,33 @@ You should find the different services on the following ports:
 * /feed: http://localhost:8081
 * /client: http://localhost:8000
 
-### eksctl
+### eksctl and kubectl
 
 To setup and run the clusters take a look at the `k8s/cluster.yaml`. 
 
+Create your secrets as follows: 
+
+1. Manually: `echo -n stringToConvert | base64`
+3. `kubectl apply -f ./aws-secret.yaml`
+2. Generate: `kubectl create secret generic aws-secret --from-literal=DB_USER='exampleuser' --from-literal=DB_PASS='examplepass' --from-literal=JWT_SECRET='examplesecret'`
+
+If run correctly, you can now view your secrets as follows: 
+
+* `kubectl get secret aws-secret -o yaml`
+* `kubectl describe secrets/aws-secret`
+
 Then run: 
 
+* `eksctl version`
+* `kubectl version`
 * `eksctl create cluster -f k8s/cluster.yaml`
+* `kubectl cluster-info`
+* `kubectl get nodes`
+* `kubectl get pods`
+* `kubectl get deploy`
+* `kubectl get config`
+* `kubectl get configmaps`
+* `kubectl get secrets`
 
 ### Terraform
 
