@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    service: client
+  name: client
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        service: client
+        api: external
+    spec:
+      containers:
+        - image: ./../udacity-c3-frontend/Dockerfile
+          name: client
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "1024Mi"
+              cpu: "500m"
+      restartPolicy: Always

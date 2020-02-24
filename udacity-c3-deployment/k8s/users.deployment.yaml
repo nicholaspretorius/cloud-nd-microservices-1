@@ -1,0 +1,67 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    service: restapi-users
+  name: restapi-users
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        service: restapi-users
+    spec:
+      containers:
+        - image: ./../udacity-c3-restapi-user/Dockerfile
+          name: restapi-users
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "1024Mi"
+              cpu: "500m"
+          env:
+            - name: JWT_SECRET
+              valueFrom:
+                configKeyMapRef:
+                  name: env-config
+                  key: JWT_SECRET
+
+            - name: DB_HOST
+              valueFrom:
+                configKeyMapRef:
+                  name: env-config
+                  key: DB_HOST
+
+            - name: DB_USER
+              valueFrom:
+                configKeyMapRef:
+                  name: env-config
+                  key: DB_USER
+
+            - name: DB_PASS
+              valueFrom:
+                configKeyMapRef:
+                  name: env-config
+                  key: DB_PASS
+
+            - name: DB_NAME
+              valueFrom:
+                configKeyMapRef:
+                  name: env-config
+                  key: DB_NAME
+
+            - name: DB_PORT
+              valueFrom:
+                configKeyMapRef:
+                  name: env-config
+                  key: DB_PORT
+
+            - name: DB_PROTOCOL
+              valueFrom:
+                configKeyMapRef:
+                  name: env-config
+                  key: DB_PROTOCOL
+      restartPolicy: Always

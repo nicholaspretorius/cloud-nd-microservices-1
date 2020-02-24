@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    service: reverseproxy
+  name: reverseproxy
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        service: reverseproxy
+        api: external
+    spec:
+      containers:
+        - image: ./../udacity-c3-deployment/docker/Dockerfile
+          name: reverseproxy
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "1024Mi"
+              cpu: "500m"
+      restartPolicy: Always
