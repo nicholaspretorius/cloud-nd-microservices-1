@@ -25,3 +25,19 @@ You should find the different services on the following ports:
 * /users: http://localhost:8082
 * /feed: http://localhost:8081
 * /client: http://localhost:8000
+
+### Terraform
+
+There is a terraform folder containing Terraform variables, specifically, pay attention to `terraform.tfvars` and modify where appropriate. 
+
+Note that the [default] AWS credentials are used from `~/aws/credentials`. i.e. AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY need to be specified as environment variables in your Terminal. Instead of manually setting these in each Terminal session, you can add these to: `~/.bashrc` and then, from the command line, run `source ~/.bashrc` in order to activate the latest vars there. 
+
+Commands to run in order to setup KubeOne on AWS infrastructure via Terraform: 
+
+* `terraform version` check Terraform version
+* `kubeone version` check KubeOne version
+* `cd/terraform && terraform init` Initialise Terraform
+* `terraform plan` shows what Terraform will setup for you
+* `terraform plan -out plan` outputs a non-human readable Terraform plan, in order to see what the plan outputs, run the following command: 
+* `terraform show -json plan`
+* `terraform apply`
