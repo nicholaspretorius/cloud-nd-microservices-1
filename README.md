@@ -26,6 +26,14 @@ You should find the different services on the following ports:
 * /feed: http://localhost:8081
 * /client: http://localhost:8000
 
+### eksctl
+
+To setup and run the clusters take a look at the `k8s/cluster.yaml`. 
+
+Then run: 
+
+* `eksctl create cluster -f k8s/cluster.yaml`
+
 ### Terraform
 
 There is a terraform folder containing Terraform variables, specifically, pay attention to `terraform.tfvars` and modify where appropriate. 
