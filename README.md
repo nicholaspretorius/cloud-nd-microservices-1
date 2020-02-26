@@ -64,8 +64,15 @@ Then run:
 * `kubectl get nodes`
 * `kubectl get pods`
 * `kubectl get deploy`
-* `kubectl get config`
 * `kubectl get configmaps`
+
+### Travis CI
+
+Travis CI will build once a push to GitHub has happened. If you want to skip a CI build, i.e. for updates to files that do not impact build, then you can commit as follows: 
+
+`git commit -m "docs: Update docs [skip ci]"`
+
+Note the use of the `[skip ci]` indicator in the Git commit message. 
 
 ### Terraform
 
