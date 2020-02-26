@@ -24,7 +24,12 @@ You should find the different services on the following ports:
 
 * /users: http://localhost:8082
 * /feed: http://localhost:8081
-* /client: http://localhost:8000
+* /client: http://localhost:8100
+
+With the proxy, which the client reads, you will find them here: 
+
+* /users: http://localhost:8080/api/v0/users
+* /feed: http://localhost:8080/api/v0/feed
 
 ### eksctl and kubectl
 
@@ -35,6 +40,8 @@ Create your secrets as follows:
 1. Manually: `echo -n stringToConvert | base64`
 3. `kubectl apply -f ./aws-secret.yaml`
 2. Generate: `kubectl create secret generic aws-secret --from-literal=DB_USER='exampleuser' --from-literal=DB_PASS='examplepass' --from-literal=JWT_SECRET='examplesecret'`
+
+Alternately, you can run from a file as follows: `kubectl create secret generic aws-secret --from-file=./AWS_USERNAME --from-file=./AWS_PASSWORD `
 
 If run correctly, you can now view your secrets as follows: 
 
