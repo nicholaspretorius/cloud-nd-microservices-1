@@ -3,11 +3,11 @@ kind: ConfigMap
 metadata:
   name: env-config
 data:
-  DB_HOST: users-feed-db
-  DB_NAME: db
-  DB_PORT: 5432
-  DB_PROTOCOL: postgres
-  S3_BUCKET: ncp-cloud-nd-s3-bucket
-  AWS_REGION: us-east-1
-  AWS_PROFILE: aws_educate
-  PORT: 8080
+  DB_HOST: "ncp-udacity-cloudnd-project3.cu3s9rrmz2cq.eu-west-1.rds.amazonaws.com"
+  DB_NAME: "users"
+  DB_PORT: "5432"
+  DB_PROTOCOL: "postgres"
+  S3_BUCKET: "ncp-cloudnd-project3"
+  AWS_REGION: "eu-west-1"
+  AWS_PROFILE: "default"
+  PORT: "8080"

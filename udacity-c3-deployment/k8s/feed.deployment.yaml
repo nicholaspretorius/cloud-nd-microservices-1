@@ -5,14 +5,14 @@ metadata:
     service: restapi-feed
   name: restapi-feed
 spec:
-  replicas: 2
+  replicas: 3
   template:
     metadata:
       labels:
         service: restapi-feed
     spec:
       containers:
-        - image: ./../udacity-c3-restapi-feed/Dockerfile
+        - image: scheele/udacity-restapi-feed
           name: restapi-feed
           imagePullPolicy: Always
           resources:
@@ -25,69 +25,50 @@ spec:
           env:
             - name: S3_BUCKET
               valueFrom:
-                configKeyMapRef:
+                configMapKeyRef:
                   name: env-config
                   key: S3_BUCKET
-
-            - name: AWS_REGION
-              valueFrom:
-                configKeyMapRef:
-                  name: env-config
-                  key: AWS_REGION
-
             - name: AWS_PROFILE
               valueFrom:
-                configKeyMapRef:
+                configMapKeyRef:
                   name: env-config
                   key: AWS_PROFILE
-
+            - name: AWS_REGION
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: AWS_REGION
             - name: JWT_SECRET
               valueFrom:
-                configKeyMapRef:
+                configMapKeyRef:
                   name: env-config
                   key: JWT_SECRET
-
-            - name: DB_HOST
-              valueFrom:
-                configKeyMapRef:
-                  name: env-config
-                  key: DB_HOST
-
-            - name: DB_USER
-              valueFrom:
-                configKeyMapRef:
-                  name: env-config
-                  key: DB_USER
-
-            - name: DB_PASS
-              valueFrom:
-                configKeyMapRef:
-                  name: env-config
-                  key: DB_PASS
-
             - name: DB_NAME
               valueFrom:
-                configKeyMapRef:
+                configMapKeyRef:
                   name: env-config
                   key: DB_NAME
-
-            - name: DB_PORT
+            - name: DB_HOST
               valueFrom:
-                configKeyMapRef:
+                configMapKeyRef:
                   name: env-config
-                  key: DB_PORT
-
-            - name: DB_PROTOCOL
+                  key: DB_HOST
+            - name: DB_PASS
               valueFrom:
-                configKeyMapRef:
-                  name: env-config
-                  key: DB_PROTOCOL
-            volumeMounts:
+                secretKeyRef:
+                  name: env-secret
+                  key: DB_PASS
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: env-secret
+                  key: DB_USER
+          volumeMounts:
             - name: aws-secret
               mountPath: "/root/.aws/"
               readOnly: true
       restartPolicy: Always
       volumes:
-      - name: aws-secret
-        secret:
-          secretName: aws-secret
+        - name: aws-secret
+          secret:
+            secretName: aws-secret

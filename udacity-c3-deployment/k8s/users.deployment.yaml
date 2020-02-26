@@ -25,43 +25,43 @@ spec:
           env:
             - name: JWT_SECRET
               valueFrom:
-                configKeyMapRef:
+                configMapKeyRef:
                   name: env-config
                   key: JWT_SECRET
 
             - name: DB_HOST
               valueFrom:
-                configKeyMapRef:
+                configMapKeyRef:
                   name: env-config
                   key: DB_HOST
 
             - name: DB_USER
               valueFrom:
-                configKeyMapRef:
+                configMapKeyRef:
                   name: env-config
                   key: DB_USER
 
             - name: DB_PASS
               valueFrom:
-                configKeyMapRef:
+                configMapKeyRef:
                   name: env-config
                   key: DB_PASS
 
             - name: DB_NAME
               valueFrom:
-                configKeyMapRef:
+                configMapKeyRef:
                   name: env-config
                   key: DB_NAME
 
             - name: DB_PORT
               valueFrom:
-                configKeyMapRef:
+                configMapKeyRef:
                   name: env-config
                   key: DB_PORT
 
             - name: DB_PROTOCOL
               valueFrom:
-                configKeyMapRef:
+                configMapKeyRef:
                   name: env-config
                   key: DB_PROTOCOL
       restartPolicy: Always
