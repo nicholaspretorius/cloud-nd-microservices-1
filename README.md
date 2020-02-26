@@ -18,6 +18,11 @@ To run the application, from the command line, run:
 * `SELECT * FROM "User";` will return all values in the Users table, there should not be any
 * `SELECT * FROM "FeedItem";` will return all values in the FeedItem table, there should not be any
 
+### Production docker-compose
+
+To run the "production" docker-compose file, run the following from the command-line: 
+
+`docker-compose -f docker-compose.prod.yml up --build`
 
 
 You should find the different services on the following ports: 
@@ -52,16 +57,19 @@ Then run:
 
 * `eksctl version`
 * `kubectl version`
-* `eksctl create cluster -f k8s/cluster.yaml`
+* `kubectl get secrets`
+* `kubectl delete secrets env-secret.yaml`
+* `eksctl create cluster -f cluster.yaml`
 * `kubectl cluster-info`
 * `kubectl get nodes`
 * `kubectl get pods`
 * `kubectl get deploy`
 * `kubectl get config`
 * `kubectl get configmaps`
-* `kubectl get secrets`
 
 ### Terraform
+
+*Note: Terraform is not currently being used*
 
 There is a terraform folder containing Terraform variables, specifically, pay attention to `terraform.tfvars` and modify where appropriate. 
 
