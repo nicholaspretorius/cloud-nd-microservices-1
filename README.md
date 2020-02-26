@@ -64,9 +64,24 @@ Then run:
 * `eksctl create cluster -f cluster.yaml`
 * `kubectl cluster-info`
 * `kubectl get nodes`
-* `kubectl get pods`
-* `kubectl get deploy`
+
+In order to create your configmaps, deployments and services, run the following: 
+
+* `kubectl apply -f ./udacity-c3-deployment/k8s/env-configmap.yaml`
 * `kubectl get configmaps`
+* `kubectl apply -f ./udacity-c3-deployment/k8s/users.deployment.yaml`
+* `kubectl get deploy`
+* `kubectl apply -f ./udacity-c3-deployment/k8s/feed.deployment.yaml`
+* `kubectl apply -f ./udacity-c3-deployment/k8s/client.deployment.yaml`
+* `kubectl apply -f ./udacity-c3-deployment/k8s/reverseproxy.deployment.yaml`
+* `kubectl apply -f ./udacity-c3-deployment/k8s/users.service.yaml`
+* `kubectl apply -f ./udacity-c3-deployment/k8s/feed.service.yaml`
+* `kubectl apply -f ./udacity-c3-deployment/k8s/client.service.yaml`
+* `kubectl apply -f ./udacity-c3-deployment/k8s/reverseproxy.service.yaml`
+* `kubectl get services`
+* `kubectl get pods`
+
+
 
 ### Travis CI
 
