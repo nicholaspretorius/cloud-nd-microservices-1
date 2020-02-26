@@ -1,5 +1,7 @@
 # Monolith to Microservices
 
+[![Build Status](https://travis-ci.com/nicholaspretorius/cloud-nd-microservices-1.svg?branch=master)](https://travis-ci.com/nicholaspretorius/cloud-nd-microservices-1)
+
 Taking the Udacity Cloud Developer Nanodegree Project 2 and converting the monolith into microservices via Docker and Docker Compose. 
 
 ### Development Notes
