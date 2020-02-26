@@ -1,0 +1,83 @@
+version: "3.7"
+
+services:
+  reverseproxy:
+    build:
+      context: ./udacity-c3-deployment/docker
+      dockerfile: Dockerfile
+    restart: always
+    depends_on:
+      - restapi-user
+      - restapi-feed
+    ports:
+      - 8080:8080
+  #   users-feed-db:
+  #     build:
+  #       context: ./db
+  #       dockerfile: Dockerfile
+  #     expose:
+  #       - 5432
+  #     environment:
+  #       - POSTGRES_USER=postgres
+  #       - POSTGRES_PASSWORD=postgres
+  #       - POSTGRES_DB=db
+  restapi-user:
+    build:
+      context: ./udacity-c3-restapi-user
+      dockerfile: Dockerfile
+    volumes:
+      - $HOME/.aws:/root/.aws
+    ports:
+      - 8082:8080
+    env_file:
+      - ./.env.prod
+    environment:
+      - NODE_ENV=production
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
+      - DB_NAME=${DB_NAME}
+      - DB_PORT=${DB_PORT}
+      - DB_PROTOCOL=${DB_PROTOCOL}
+      - JWT_SECRET=${JWT_SECRET}
+      - S3_BUCKET=${S3_BUCKET}
+      - AWS_REGION=${AWS_REGION}
+      - AWS_PROFILE=${AWS_PROFILE}
+    # depends_on:
+    #   - users-feed-db
+  restapi-feed:
+    build:
+      context: ./udacity-c3-restapi-feed
+      dockerfile: Dockerfile
+    volumes:
+      - $HOME/.aws:/root/.aws
+    ports:
+      - 8081:8080
+    env_file:
+      - ./.env.prod
+    environment:
+      - NODE_ENV=production
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
+      - DB_NAME=${DB_NAME}
+      - DB_PORT=${DB_PORT}
+      - DB_PROTOCOL=${DB_PROTOCOL}
+      - JWT_SECRET=${JWT_SECRET}
+      - S3_BUCKET=${S3_BUCKET}
+      - AWS_REGION=${AWS_REGION}
+      - AWS_PROFILE=${AWS_PROFILE}
+    # depends_on:
+    #   - users-feed-db
+  client:
+    build:
+      context: ./udacity-c3-frontend
+      dockerfile: Dockerfile
+    volumes:
+      - $HOME/.aws:/root/.aws
+    ports:
+      - 8100:80
+    environment:
+      - NODE_ENV=production
+    # depends_on:
+    #   - users-feed-db
