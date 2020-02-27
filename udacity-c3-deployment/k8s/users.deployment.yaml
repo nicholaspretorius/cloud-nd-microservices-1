@@ -12,7 +12,7 @@ spec:
         service: restapi-users
     spec:
       containers:
-        - image: ./../udacity-c3-restapi-user/Dockerfile
+        - image: nicholaspretorius/ncp-clound-project3-restapi-user
           name: restapi-users
           imagePullPolicy: Always
           resources:

@@ -13,7 +13,7 @@ spec:
         api: external
     spec:
       containers:
-        - image: ./../udacity-c3-deployment/docker/Dockerfile
+        - image: nicholaspretorius/ncp-clound-project3-restapi-reverseproxy
           name: reverseproxy
           imagePullPolicy: Always
           ports:

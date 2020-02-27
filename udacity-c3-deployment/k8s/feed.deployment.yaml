@@ -12,7 +12,7 @@ spec:
         service: restapi-feed
     spec:
       containers:
-        - image: scheele/udacity-restapi-feed
+        - image: nicholaspretorius/ncp-clound-project3-restapi-feed
           name: restapi-feed
           imagePullPolicy: Always
           resources:
