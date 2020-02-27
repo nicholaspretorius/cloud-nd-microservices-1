@@ -12,7 +12,7 @@ spec:
         service: restapi-feed
     spec:
       containers:
-        - image: nicholaspretorius/ncp-clound-project3-restapi-feed
+        - image: nicholaspretorius/ncp-clound-project3-restapi-feed:first
           name: restapi-feed
           imagePullPolicy: Always
           resources:
@@ -40,8 +40,8 @@ spec:
                   key: AWS_REGION
             - name: JWT_SECRET
               valueFrom:
-                configMapKeyRef:
-                  name: env-config
+                secretKeyRef:
+                  name: env-secret
                   key: JWT_SECRET
             - name: DB_NAME
               valueFrom:

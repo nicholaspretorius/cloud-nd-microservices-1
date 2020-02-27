@@ -12,7 +12,7 @@ spec:
         service: restapi-users
     spec:
       containers:
-        - image: nicholaspretorius/ncp-clound-project3-restapi-user
+        - image: nicholaspretorius/ncp-clound-project3-restapi-user:first
           name: restapi-users
           imagePullPolicy: Always
           resources:
@@ -25,8 +25,8 @@ spec:
           env:
             - name: JWT_SECRET
               valueFrom:
-                configMapKeyRef:
-                  name: env-config
+                secretKeyRef:
+                  name: env-secret
                   key: JWT_SECRET
 
             - name: DB_HOST
@@ -37,14 +37,14 @@ spec:
 
             - name: DB_USER
               valueFrom:
-                configMapKeyRef:
-                  name: env-config
+                secretKeyRef:
+                  name: env-secret
                   key: DB_USER
 
             - name: DB_PASS
               valueFrom:
-                configMapKeyRef:
-                  name: env-config
+                secretKeyRef:
+                  name: env-secret
                   key: DB_PASS
 
             - name: DB_NAME

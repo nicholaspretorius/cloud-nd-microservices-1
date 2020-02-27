@@ -13,7 +13,7 @@ spec:
         api: external
     spec:
       containers:
-        - image: nicholaspretorius/ncp-clound-project3-restapi-client
+        - image: nicholaspretorius/ncp-clound-project3-restapi-client:first
           name: client
           imagePullPolicy: Always
           ports:
