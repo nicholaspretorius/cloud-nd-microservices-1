@@ -10,14 +10,12 @@ spec:
     metadata:
       labels:
         service: reverseproxy
-        api: external
+        # api: external
     spec:
       containers:
         - image: nicholaspretorius/ncp-clound-project3-restapi-reverseproxy:first
           name: reverseproxy
           imagePullPolicy: Always
-          ports:
-            - containerPort: 8080
           resources:
             requests:
               memory: "64Mi"
@@ -25,4 +23,6 @@ spec:
             limits:
               memory: "1024Mi"
               cpu: "500m"
+          ports:
+            - containerPort: 8080
       restartPolicy: Always
