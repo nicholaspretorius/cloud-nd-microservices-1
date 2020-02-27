@@ -96,6 +96,7 @@ Then run:
 * `eksctl utils update-cluster-logging --region=eu-west-1 --cluster=microservices1-cluster2`
 * `eksctl create cluster --name=eksworkshop-eksctl --nodes=3 --managed --alb-ingress-access --region=${AWS_REGION}`
 * `kubectl cluster-info`
+* `kubectl config view`
 * `eksctl delete cluster --name=name-here`
 * `kubectl get nodes`
 * `kubectl get service client -o wide`
@@ -108,6 +109,7 @@ In order to create your configmaps, deployments and services, run the following:
 * `kubectl get deploy`
 * `kubectl get pods`
 * `kubectl describe pods podnamehere`
+* `kubectl logs podname-7bdc944cdb-kn9wv`
 * `kubectl apply -f ./udacity-c3-deployment/k8s/feed.deployment.yaml`
 * `kubectl apply -f ./udacity-c3-deployment/k8s/client.deployment.yaml`
 * `kubectl apply -f ./udacity-c3-deployment/k8s/reverseproxy.deployment.yaml`
@@ -117,6 +119,12 @@ In order to create your configmaps, deployments and services, run the following:
 * `kubectl apply -f ./udacity-c3-deployment/k8s/reverseproxy.service.yaml`
 * `kubectl get services`
 * `kubectl get pods`
+* `kubectl get pods -o wide`
+* `kubectl get pods reverseproxy-7bdc944cdb-s7d4n --template='{{(index (index .spec.containers 0).ports 0).containerPort}}{{"\n"}}'`
+* `kubectl get rs`
+* `kubectl port-forward services/reverseproxy 8080:8080`
+* `kubectl port-forward services/client 8100:8100`
+* `kubectl port-forward services/reverseproxy 8080:8080 &` to run in background, then pres `fg` to get it back into foreground
 
 ### Cleanup
 
