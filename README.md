@@ -40,7 +40,11 @@ With the proxy, which the client reads, you will find them here:
 
 ### Docker
 
-Kubernetes deployments require your containers to be located in a registry, as such, you need to push your containers to a registry, such as Docker Hub, AWS ECR (Elastic Container Registry) or similar. In order to do so, you need to tag your local image with the name of your registry and then push the image to the registry. 
+Kubernetes deployments require your containers to be located in a registry, as such, you need to push your containers to a registry, such as Docker Hub, AWS ECR (Elastic Container Registry) or similar. In order to do so, you need to name your local image with the name of your registry and tag it. Then push the image to the registry. 
+
+*Note: The registry used needs to be the prefix of the tagged image, for example: registryname/imagename:tagname. This is how Docker knows which registry to push to.*
+
+*Docker can push to any registry it has been logged into. You can check these registries by looking at the "auth" contents in the config.json file in `~/.Docker/config.json`.*
 
 Login: 
 
@@ -56,9 +60,12 @@ Practice:
 * `docker tag microservices1_restapi-user nicholaspretorius/ncp-clound-project3-restapi-user:first`
 * `docker push nicholaspretorius/ncp-clound-project3-restapi-user:first`
 
-* `docker tag microservices1_restapi-feed docker/ncp-clound-project3-restapi-feed:latest`
-* `docker tag microservices1_client docker/ncp-clound-project3-restapi-client:latest`
-* `docker tag microservices1_reverseproxy docker/ncp-clound-project3-restapi-reverseproxy:latest`
+* `docker tag microservices1_restapi-feed nicholaspretorius/ncp-clound-project3-restapi-feed:first`
+* `docker push nicholaspretorius/ncp-clound-project3-restapi-feed:first`
+* `docker tag microservices1_client nicholaspretorius/ncp-clound-project3-restapi-client:first`
+* `docker push nicholaspretorius/ncp-clound-project3-restapi-client:first`
+* `docker tag microservices1_reverseproxy nicholaspretorius/ncp-clound-project3-restapi-reverseproxy:first`
+* `docker push nicholaspretorius/ncp-clound-project3-restapi-reverseproxy:first`
 
 
 ### eksctl and kubectl
@@ -85,7 +92,7 @@ Then run:
 * `kubectl get secrets`
 * `kubectl delete secrets env-secret.yaml`
 * `eksctl create cluster -f cluster.yaml`
-* `eksctl create cluster --name microservices1-cluster2`
+* `eksctl create cluster --name ncp-cloudnd-project3-v3`
 * `eksctl utils update-cluster-logging --region=eu-west-1 --cluster=microservices1-cluster2`
 * `eksctl create cluster --name=eksworkshop-eksctl --nodes=3 --managed --alb-ingress-access --region=${AWS_REGION}`
 * `kubectl cluster-info`
