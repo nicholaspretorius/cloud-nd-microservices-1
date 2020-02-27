@@ -106,6 +106,8 @@ In order to create your configmaps, deployments and services, run the following:
 * `kubectl get configmaps`
 * `kubectl apply -f ./udacity-c3-deployment/k8s/users.deployment.yaml`
 * `kubectl get deploy`
+* `kubectl get pods`
+* `kubectl describe pods podnamehere`
 * `kubectl apply -f ./udacity-c3-deployment/k8s/feed.deployment.yaml`
 * `kubectl apply -f ./udacity-c3-deployment/k8s/client.deployment.yaml`
 * `kubectl apply -f ./udacity-c3-deployment/k8s/reverseproxy.deployment.yaml`
