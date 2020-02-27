@@ -38,6 +38,29 @@ With the proxy, which the client reads, you will find them here:
 * /users: http://localhost:8080/api/v0/users
 * /feed: http://localhost:8080/api/v0/feed
 
+### Docker
+
+Kubernetes deployments require your containers to be located in a registry, as such, you need to push your containers to a registry, such as Docker Hub, AWS ECR (Elastic Container Registry) or similar. In order to do so, you need to tag your local image with the name of your registry and then push the image to the registry. 
+
+Login: 
+
+* `docker login --username=yourhubusername --email=youremail@company.com`
+
+Example:
+
+* `docker tag local-image:tagname new-repo:tagname`
+* `docker push new-repo:tagname`
+
+Practice: 
+
+* `docker tag microservices1_restapi-user nicholaspretorius/ncp-clound-project3-restapi-user:first`
+* `docker push nicholaspretorius/ncp-clound-project3-restapi-user:first`
+
+* `docker tag microservices1_restapi-feed docker/ncp-clound-project3-restapi-feed:latest`
+* `docker tag microservices1_client docker/ncp-clound-project3-restapi-client:latest`
+* `docker tag microservices1_reverseproxy docker/ncp-clound-project3-restapi-reverseproxy:latest`
+
+
 ### eksctl and kubectl
 
 To setup and run the clusters take a look at the `k8s/cluster.yaml`. 
@@ -62,8 +85,13 @@ Then run:
 * `kubectl get secrets`
 * `kubectl delete secrets env-secret.yaml`
 * `eksctl create cluster -f cluster.yaml`
+* `eksctl create cluster --name microservices1-cluster2`
+* `eksctl utils update-cluster-logging --region=eu-west-1 --cluster=microservices1-cluster2`
+* `eksctl create cluster --name=eksworkshop-eksctl --nodes=3 --managed --alb-ingress-access --region=${AWS_REGION}`
 * `kubectl cluster-info`
+* `eksctl delete cluster --name=name-here`
 * `kubectl get nodes`
+* `kubectl get service client -o wide`
 
 In order to create your configmaps, deployments and services, run the following: 
 
@@ -80,6 +108,17 @@ In order to create your configmaps, deployments and services, run the following:
 * `kubectl apply -f ./udacity-c3-deployment/k8s/reverseproxy.service.yaml`
 * `kubectl get services`
 * `kubectl get pods`
+
+### Cleanup
+
+To delete everything you can run: 
+
+* `eksctl delete cluster --name=name-here`
+
+Then run through all the deployments and service deletions as follows: 
+
+* `kubectl delete -f ./udacity-c3-deployment/k8s/users.service.yaml`
+* `kubectl delete -f ./udacity-c3-deployment/k8s/users.deployment.yaml`
 
 
 
