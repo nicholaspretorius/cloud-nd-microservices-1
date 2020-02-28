@@ -13,7 +13,7 @@ To run the application, from the command line, run:
 * `curl http://localhost:8100` to get what is running on localhost:8100 in that container
 * `exit` to exit bash on the running container
 * `docker-compose down` to stop the apps
-* `docker-compose exec users-feed-db pswl -U postgres` to connect to the DB via PSQL
+* `docker-compose exec users-feed-db psql -U postgres` to connect to the DB via PSQL
 * `\l` to list the databases
 * `\c db` to connect to the database
 * `\dt` to list the relations, you should see tables for `User` and `FeedItem`
