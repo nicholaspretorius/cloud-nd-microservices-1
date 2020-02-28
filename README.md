@@ -57,15 +57,15 @@ Example:
 
 Practice: 
 
-* `docker tag microservices1_restapi-user nicholaspretorius/ncp-clound-project3-restapi-user:first`
-* `docker push nicholaspretorius/ncp-clound-project3-restapi-user:first`
+* `docker tag microservices1_restapi-user nicholaspretorius/ncp-clound-project3-restapi-user:latest`
+* `docker push nicholaspretorius/ncp-clound-project3-restapi-user:latest`
 
-* `docker tag microservices1_restapi-feed nicholaspretorius/ncp-clound-project3-restapi-feed:first`
-* `docker push nicholaspretorius/ncp-clound-project3-restapi-feed:first`
-* `docker tag microservices1_client nicholaspretorius/ncp-clound-project3-restapi-client:first`
-* `docker push nicholaspretorius/ncp-clound-project3-restapi-client:first`
-* `docker tag microservices1_reverseproxy nicholaspretorius/ncp-clound-project3-restapi-reverseproxy:first`
-* `docker push nicholaspretorius/ncp-clound-project3-restapi-reverseproxy:first`
+* `docker tag microservices1_restapi-feed nicholaspretorius/ncp-clound-project3-restapi-feed:latest`
+* `docker push nicholaspretorius/ncp-clound-project3-restapi-feed:latest`
+* `docker tag microservices1_client nicholaspretorius/ncp-clound-project3-restapi-client:latest`
+* `docker push nicholaspretorius/ncp-clound-project3-restapi-client:latest`
+* `docker tag microservices1_reverseproxy nicholaspretorius/ncp-clound-project3-restapi-reverseproxy:latest`
+* `docker push nicholaspretorius/ncp-clound-project3-restapi-reverseproxy:latest`
 
 
 ### eksctl and kubectl
