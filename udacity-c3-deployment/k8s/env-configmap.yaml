@@ -3,8 +3,8 @@ kind: ConfigMap
 metadata:
   name: env-config
 data:
-  DB_HOST: "ncp-udacity-cloudnd-project3.cu3s9rrmz2cq.eu-west-1.rds.amazonaws.com"
-  DB_NAME: "users"
+  DB_HOST: "ncp-cloudnd-project3.cu3s9rrmz2cq.eu-west-1.rds.amazonaws.com"
+  DB_NAME: "users_feed_db"
   DB_PORT: "5432"
   DB_PROTOCOL: "postgres"
   S3_BUCKET: "ncp-cloudnd-project3"
