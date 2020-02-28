@@ -12,7 +12,7 @@ spec:
         service: restapi-feed
     spec:
       containers:
-        - image: nicholaspretorius/ncp-clound-project3-restapi-feed:first
+        - image: nicholaspretorius/ncp-clound-project3-restapi-feed:latest
           name: restapi-feed
           imagePullPolicy: Always
           resources:
