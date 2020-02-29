@@ -92,12 +92,12 @@ Then run:
 * `kubectl get secrets`
 * `kubectl delete secrets env-secret.yaml`
 * `eksctl create cluster -f cluster.yaml`
-* `eksctl create cluster --name ncp-cloudnd-project3-v3`
+* `eksctl create cluster --name ncp-cloudnd-project3-v6`
 * `eksctl utils update-cluster-logging --region=eu-west-1 --cluster=microservices1-cluster2`
 * `eksctl create cluster --name=eksworkshop-eksctl --nodes=3 --managed --alb-ingress-access --region=${AWS_REGION}`
 * `kubectl cluster-info`
 * `kubectl config view`
-* `eksctl delete cluster --name=name-here`
+* `eksctl delete cluster --name=ncp-cloudnd-project3-v5`
 * `kubectl get nodes`
 * `kubectl get service client -o wide`
 
