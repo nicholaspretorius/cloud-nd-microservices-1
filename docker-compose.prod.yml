@@ -15,7 +15,7 @@ services:
   restapi-user:
     build:
       context: ./udacity-c3-restapi-user
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.prod
     volumes:
       - "./udacity-c3-restapi-user:/usr/src/app"
       - "/usr/src/app/node_modules"
@@ -28,7 +28,7 @@ services:
   restapi-feed:
     build:
       context: ./udacity-c3-restapi-feed
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.prod
     volumes:
       - "./udacity-c3-restapi-feed:/usr/src/app"
       - "/usr/src/app/node_modules"
