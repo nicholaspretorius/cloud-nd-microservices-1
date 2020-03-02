@@ -15,7 +15,7 @@ services:
   restapi-user:
     build:
       context: ./udacity-c3-restapi-user
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.prod
     volumes:
       - $HOME/.aws:/root/.aws
     ports:
@@ -35,7 +35,7 @@ services:
   restapi-feed:
     build:
       context: ./udacity-c3-restapi-feed
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.prod
     volumes:
       - $HOME/.aws:/root/.aws
     ports:
