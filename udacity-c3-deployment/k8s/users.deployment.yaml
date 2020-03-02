@@ -12,7 +12,7 @@ spec:
         service: restapi-users
     spec:
       containers:
-        - image: nicholaspretorius/ncp-clound-project3-restapi-user:latest
+        - image: nicholaspretorius/ncp-clound-project3-restapi-user:current
           name: restapi-users
           imagePullPolicy: Always
           resources:
