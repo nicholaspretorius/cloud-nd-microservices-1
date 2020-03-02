@@ -57,15 +57,15 @@ Example:
 
 Practice: 
 
-* `docker tag microservices1_restapi-user nicholaspretorius/ncp-clound-project3-restapi-user:latest`
-* `docker push nicholaspretorius/ncp-clound-project3-restapi-user:latest`
+* `docker tag microservices1_restapi-user nicholaspretorius/ncp-clound-project3-restapi-user:current`
+* `docker push nicholaspretorius/ncp-clound-project3-restapi-user:current`
 
-* `docker tag microservices1_restapi-feed nicholaspretorius/ncp-clound-project3-restapi-feed:latest`
-* `docker push nicholaspretorius/ncp-clound-project3-restapi-feed:latest`
-* `docker tag microservices1_client nicholaspretorius/ncp-clound-project3-restapi-client:latest`
-* `docker push nicholaspretorius/ncp-clound-project3-restapi-client:latest`
-* `docker tag microservices1_reverseproxy nicholaspretorius/ncp-clound-project3-restapi-reverseproxy:latest`
-* `docker push nicholaspretorius/ncp-clound-project3-restapi-reverseproxy:latest`
+* `docker tag microservices1_restapi-feed nicholaspretorius/ncp-clound-project3-restapi-feed:current`
+* `docker push nicholaspretorius/ncp-clound-project3-restapi-feed:current`
+* `docker tag microservices1_client nicholaspretorius/ncp-clound-project3-restapi-client:current`
+* `docker push nicholaspretorius/ncp-clound-project3-restapi-client:current`
+* `docker tag microservices1_reverseproxy nicholaspretorius/ncp-clound-project3-restapi-reverseproxy:current`
+* `docker push nicholaspretorius/ncp-clound-project3-restapi-reverseproxy:current`
 
 
 ### eksctl and kubectl
@@ -97,7 +97,7 @@ Then run:
 * `eksctl create cluster --name=eksworkshop-eksctl --nodes=3 --managed --alb-ingress-access --region=${AWS_REGION}`
 * `kubectl cluster-info`
 * `kubectl config view`
-* `eksctl delete cluster --name=ncp-cloudnd-project3-v5`
+* `eksctl delete cluster --name=ncp-cloudnd-project3-v6`
 * `kubectl get nodes`
 * `kubectl get service client -o wide`
 
