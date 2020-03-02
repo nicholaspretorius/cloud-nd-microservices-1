@@ -12,7 +12,7 @@ spec:
         service: restapi-users
     spec:
       containers:
-        - image: nicholaspretorius/ncp-clound-project3-restapi-user:current
+        - image: nicholaspretorius/ncp-clound-project3-restapi-user:v1
           name: restapi-users
           imagePullPolicy: Always
           resources:
@@ -23,6 +23,24 @@ spec:
               memory: "1024Mi"
               cpu: "500m"
           env:
+            - name: S3_BUCKET
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: S3_BUCKET
+
+            - name: AWS_PROFILE
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: AWS_PROFILE
+
+            - name: AWS_REGION
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: AWS_REGION
+
             - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:

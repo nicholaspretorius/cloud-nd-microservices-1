@@ -13,7 +13,7 @@ spec:
         # api: external
     spec:
       containers:
-        - image: nicholaspretorius/ncp-clound-project3-restapi-reverseproxy:current
+        - image: nicholaspretorius/ncp-clound-project3-restapi-reverseproxy:v1
           name: reverseproxy
           imagePullPolicy: Always
           resources:
