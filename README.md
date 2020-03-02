@@ -57,15 +57,15 @@ Example:
 
 Practice: 
 
-* `docker tag microservices1_restapi-user nicholaspretorius/ncp-clound-project3-restapi-user:current`
-* `docker push nicholaspretorius/ncp-clound-project3-restapi-user:current`
+* `docker tag microservices1_restapi-user nicholaspretorius/ncp-clound-project3-restapi-user:v1`
+* `docker push nicholaspretorius/ncp-clound-project3-restapi-user:v1`
 
-* `docker tag microservices1_restapi-feed nicholaspretorius/ncp-clound-project3-restapi-feed:current`
-* `docker push nicholaspretorius/ncp-clound-project3-restapi-feed:current`
-* `docker tag microservices1_client nicholaspretorius/ncp-clound-project3-restapi-client:current`
-* `docker push nicholaspretorius/ncp-clound-project3-restapi-client:current`
-* `docker tag microservices1_reverseproxy nicholaspretorius/ncp-clound-project3-restapi-reverseproxy:current`
-* `docker push nicholaspretorius/ncp-clound-project3-restapi-reverseproxy:current`
+* `docker tag microservices1_restapi-feed nicholaspretorius/ncp-clound-project3-restapi-feed:v1`
+* `docker push nicholaspretorius/ncp-clound-project3-restapi-feed:v1`
+* `docker tag microservices1_client nicholaspretorius/ncp-clound-project3-restapi-client:v1`
+* `docker push nicholaspretorius/ncp-clound-project3-restapi-client:v1`
+* `docker tag microservices1_reverseproxy nicholaspretorius/ncp-clound-project3-restapi-reverseproxy:v1`
+* `docker push nicholaspretorius/ncp-clound-project3-restapi-reverseproxy:v1`
 
 
 ### eksctl and kubectl
