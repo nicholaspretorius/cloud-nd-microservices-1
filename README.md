@@ -117,6 +117,10 @@ In order to create your configmaps, deployments and services, run the following:
 * `kubectl apply -f ./udacity-c3-deployment/k8s/feed.service.yaml`
 * `kubectl apply -f ./udacity-c3-deployment/k8s/client.service.yaml`
 * `kubectl apply -f ./udacity-c3-deployment/k8s/reverseproxy.service.yaml`
+* `kubectl convert -f ./udacity-c3-deployment/k8s/users.deployment.yaml --output-version apps/v1`
+* `kubectl convert -f ./udacity-c3-deployment/k8s/feed.deployment.yaml --output-version apps/v1`
+* `kubectl convert -f ./udacity-c3-deployment/k8s/client.deployment.yaml --output-version apps/v1`
+* `kubectl convert -f ./udacity-c3-deployment/k8s/reverseproxy.deployment.yaml --output-version apps/v1`
 * `kubectl get services`
 * `kubectl get pods`
 * `kubectl get pods -o wide`
@@ -179,3 +183,7 @@ Commands to run in order to setup KubeOne on AWS infrastructure via Terraform:
 * `kubectl scale machinedeployment/project3-tf-v2-eu-west-1a -n kube-system --replicas=0` scale down
 * `kubeone reset config.yaml --tfjson tf.json`
 * `terraform destroy`
+* `kubectl convert -f ./udacity-c3-deployment/k8s/users.deployment.yaml --output-version apps/v1`
+* `kubectl convert -f ./udacity-c3-deployment/k8s/feed.deployment.yaml --output-version apps/v1`
+* `kubectl convert -f ./udacity-c3-deployment/k8s/client.deployment.yaml --output-version apps/v1`
+* `kubectl convert -f ./udacity-c3-deployment/k8s/reverseproxy.deployment.yaml --output-version apps/v1`
