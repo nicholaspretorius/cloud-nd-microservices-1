@@ -8,11 +8,11 @@ services:
       dockerfile: Dockerfile
     restart: always
     depends_on:
-      - restapi-user
+      - restapi-users
       - restapi-feed
     ports:
       - 8080:8080
-  restapi-user:
+  restapi-users:
     build:
       context: ./udacity-c3-restapi-user
       dockerfile: Dockerfile.prod

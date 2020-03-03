@@ -2,12 +2,12 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    service: restapi-user
-  name: restapi-user
+    service: restapi-users
+  name: restapi-users
 spec:
   ports:
     - name: "8080"
       port: 8080
       targetPort: 8080
   selector:
-    service: restapi-user
+    service: restapi-users
