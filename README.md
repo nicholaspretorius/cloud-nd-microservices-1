@@ -155,6 +155,13 @@ There is a terraform folder containing Terraform variables, specifically, pay at
 
 Note that the [default] AWS credentials are used from `~/aws/credentials`. i.e. AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY need to be specified as environment variables in your Terminal. Instead of manually setting these in each Terminal session, you can add these to: `~/.bashrc` and then, from the command line, run `source ~/.bashrc` in order to activate the latest vars there. 
 
+#### SSH
+
+You need an SSH key to successfully run the Terraform commands. Take a look here for background on how to add your SSH key: https://help.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+
+* `eval "$(ssh-agent -s)"` start SSH agent in background
+* `ssh-add -K ~/.ssh/id_rsa` Add SSH key to ssh-agent and store passphrase in keychain
+
 Commands to run in order to setup KubeOne on AWS infrastructure via Terraform: 
 
 * `terraform version` check Terraform version
@@ -164,3 +171,11 @@ Commands to run in order to setup KubeOne on AWS infrastructure via Terraform:
 * `terraform plan -out plan` outputs a non-human readable Terraform plan, in order to see what the plan outputs, run the following command: 
 * `terraform show -json plan`
 * `terraform apply`
+* `terraform output -json > tf.json`
+* `kubeone install config.yaml --tfjson tf.json`
+* `export KUBECONFIG=$PWD/project3-tf-v2-kubeconfig`
+* `kubectl get machinedeployments -n kube-system`
+* `kubectl scale machinedeployment/project3-tf-v2-eu-west-1a -n kube-system --replicas=2` scale up
+* `kubectl scale machinedeployment/project3-tf-v2-eu-west-1a -n kube-system --replicas=0` scale down
+* `kubeone reset config.yaml --tfjson tf.json`
+* `terraform destroy`
