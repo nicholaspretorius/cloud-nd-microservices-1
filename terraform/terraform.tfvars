@@ -1,4 +1,2 @@
-cluster_name = "udacity-microservices1"
-aws_region = "us-east-1"
-ssh_public_key_file = "~/.ssh/aws-eb-udagram.pub"
-control_plane_type = "t3.medium"
+cluster_name = "project3-tf-v2"
+aws_region = "eu-west-1"
