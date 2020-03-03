@@ -1,74 +1,94 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
+  creationTimestamp: null
   labels:
     service: restapi-feed
   name: restapi-feed
 spec:
+  progressDeadlineSeconds: 2147483647
   replicas: 3
+  revisionHistoryLimit: 2147483647
+  selector:
+    matchLabels:
+      service: restapi-feed
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
   template:
     metadata:
+      creationTimestamp: null
       labels:
         service: restapi-feed
     spec:
       containers:
-        - image: nicholaspretorius/ncp-clound-project3-restapi-feed:v1
-          name: restapi-feed
-          imagePullPolicy: Always
-          resources:
-            requests:
-              memory: "64Mi"
-              cpu: "250m"
-            limits:
-              memory: "1024Mi"
-              cpu: "500m"
-          env:
+        - env:
             - name: S3_BUCKET
               valueFrom:
                 configMapKeyRef:
-                  name: env-config
                   key: S3_BUCKET
+                  name: env-config
             - name: AWS_PROFILE
               valueFrom:
                 configMapKeyRef:
-                  name: env-config
                   key: AWS_PROFILE
+                  name: env-config
             - name: AWS_REGION
               valueFrom:
                 configMapKeyRef:
-                  name: env-config
                   key: AWS_REGION
+                  name: env-config
             - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: env-secret
                   key: JWT_SECRET
+                  name: env-secret
             - name: DB_NAME
               valueFrom:
                 configMapKeyRef:
-                  name: env-config
                   key: DB_NAME
+                  name: env-config
             - name: DB_HOST
               valueFrom:
                 configMapKeyRef:
-                  name: env-config
                   key: DB_HOST
+                  name: env-config
             - name: DB_PASS
               valueFrom:
                 secretKeyRef:
-                  name: env-secret
                   key: DB_PASS
+                  name: env-secret
             - name: DB_USER
               valueFrom:
                 secretKeyRef:
-                  name: env-secret
                   key: DB_USER
+                  name: env-secret
+          image: nicholaspretorius/ncp-clound-project3-restapi-feed:v1
+          imagePullPolicy: Always
+          name: restapi-feed
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 250m
+              memory: 64Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
           volumeMounts:
-            - name: aws-secret
-              mountPath: "/root/.aws/"
+            - mountPath: /root/.aws/
+              name: aws-secret
               readOnly: true
+      dnsPolicy: ClusterFirst
       restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
       volumes:
         - name: aws-secret
           secret:
+            defaultMode: 420
             secretName: aws-secret
+status: {}
