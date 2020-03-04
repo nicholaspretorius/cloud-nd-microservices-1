@@ -153,8 +153,6 @@ Note the use of the `[skip ci]` indicator in the Git commit message.
 
 ### Terraform
 
-*Note: Terraform is not currently being used*
-
 There is a terraform folder containing Terraform variables, specifically, pay attention to `terraform.tfvars` and modify where appropriate. 
 
 Note that the [default] AWS credentials are used from `~/aws/credentials`. i.e. AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY need to be specified as environment variables in your Terminal. Instead of manually setting these in each Terminal session, you can add these to: `~/.bashrc` and then, from the command line, run `source ~/.bashrc` in order to activate the latest vars there. 
@@ -179,9 +177,9 @@ Commands to run in order to setup KubeOne on AWS infrastructure via Terraform:
 * `kubeone install config.yaml --tfjson tf.json`
 * `export KUBECONFIG=$PWD/project3-tf-v2-kubeconfig`
 * `kubectl get machinedeployments -n kube-system`
-* `kubectl scale machinedeployment/project3-tf-v2-eu-west-1a -n kube-system --replicas=2` scale up
-* `kubectl scale machinedeployment/project3-tf-v2-eu-west-1a -n kube-system --replicas=0` scale down
-* `kubeone reset config.yaml --tfjson tf.json`
+* `kubectl scale machinedeployment/project3-tf-v3-eu-west-1a -n kube-system --replicas=2` scale up
+* `kubectl scale machinedeployment/project3-tf-v3-eu-west-1a -n kube-system --replicas=0` scale down
+* `kubeone reset ./terraform/config.yaml --tfjson ./terraform/tf.json`
 * `terraform destroy`
 * `kubectl convert -f ./udacity-c3-deployment/k8s/users.deployment.yaml --output-version apps/v1`
 * `kubectl convert -f ./udacity-c3-deployment/k8s/feed.deployment.yaml --output-version apps/v1`
