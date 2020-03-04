@@ -75,7 +75,7 @@ spec:
                 configMapKeyRef:
                   key: DB_PROTOCOL
                   name: env-config
-          image: nicholaspretorius/ncp-clound-project3-restapi-user:v1
+          image: nicholaspretorius/ncp-clound-project3-restapi-user:v2
           imagePullPolicy: Always
           name: restapi-users
           resources:

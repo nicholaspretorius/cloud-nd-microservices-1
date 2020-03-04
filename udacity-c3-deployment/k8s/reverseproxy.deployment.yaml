@@ -24,7 +24,7 @@ spec:
         service: reverseproxy
     spec:
       containers:
-        - image: nicholaspretorius/ncp-clound-project3-restapi-reverseproxy:v1
+        - image: nicholaspretorius/ncp-clound-project3-restapi-reverseproxy:v2
           imagePullPolicy: Always
           name: reverseproxy
           ports:

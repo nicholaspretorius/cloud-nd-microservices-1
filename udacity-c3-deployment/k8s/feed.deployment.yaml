@@ -65,7 +65,7 @@ spec:
                 secretKeyRef:
                   key: DB_USER
                   name: env-secret
-          image: nicholaspretorius/ncp-clound-project3-restapi-feed:v1
+          image: nicholaspretorius/ncp-clound-project3-restapi-feed:v2
           imagePullPolicy: Always
           name: restapi-feed
           resources:
