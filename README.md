@@ -130,6 +130,7 @@ In order to create your configmaps, deployments and services, run the following:
 * `kubectl port-forward services/client 8100:8100`
 * `kubectl port-forward services/reverseproxy 8080:8080 &` to run in background, then pres `fg` to get it back into foreground
 
+
 ### Cleanup
 
 To delete everything you can run: 
@@ -140,7 +141,6 @@ Then run through all the deployments and service deletions as follows:
 
 * `kubectl delete -f ./udacity-c3-deployment/k8s/users.service.yaml`
 * `kubectl delete -f ./udacity-c3-deployment/k8s/users.deployment.yaml`
-
 
 
 ### Travis CI
@@ -185,3 +185,41 @@ Commands to run in order to setup KubeOne on AWS infrastructure via Terraform:
 * `kubectl convert -f ./udacity-c3-deployment/k8s/feed.deployment.yaml --output-version apps/v1`
 * `kubectl convert -f ./udacity-c3-deployment/k8s/client.deployment.yaml --output-version apps/v1`
 * `kubectl convert -f ./udacity-c3-deployment/k8s/reverseproxy.deployment.yaml --output-version apps/v1`
+
+### k8s Tutorial
+
+* `kubectl set image deployments/kubernetes-bootcamp kubernetes-bootcamp=jocatalin/kubernetes-bootcamp:v2`
+* `kubectl describe services/kubernetes-bootcamp`
+* `export NODE_PORT=$(kubectl get services/kubernetes-bootcamp -o go-template='{{(index .spec.ports 0).nodePort}}'`
+* `echo NODE_PORT=$NODE_PORT`
+* `curl $(minikube ip):$NODE_PORT`
+* `kubectl rollout status deployments/kubernetes-bootcamp`
+* `kubectl set image deployments/kubernetes-bootcamp kubernetes-bootcamp=gcr.io/google-samples/kubernetes-bootcamp:v10` fetch image that does not exist...
+* `kubectl get deployments` see not all are ready...
+* `kubectl get pods` will show new pods erroring...
+* `kubectl rollout undo deployments/kubernetes-bootcamp` undo rollout... 
+* `kubectl get pods` back to normal, only running pods
+* `kubectl expose deployment/kubernetes-bootcamp --type="NodePort" --port 8080` expose service 
+* `kubectl get services` view service details
+* `kubectl describe services/kubernetes-bootcamp` see further details
+* `export NODE_PORT=$(kubectl get services/kubernetes-bootcamp -o go-template='{{(index .spec.ports 0).nodePort}}')`
+* `echo NODE_PORT=$NODE_PORT`
+* `curl $(minikube ip):$NODE_PORT`
+* `kubectl describe deployment` describe deployment, take not of the "label" field, which is run=kubernetes-bootcamp
+* `kubectl get pods -l run=kubernetes-bootcamp` get pods with that label (-l)
+* `kubectl get services -l run=kubernetes-bootcamp` can use for services too
+* `export POD_NAME=$(kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}')` store pod name
+* `echo Name of the Pod: $POD_NAME` display pod name
+* `kubectl label pod $POD_NAME app=v1` give pod a new label
+* `kubectl describe pods $POD_NAME` see pod has nee label
+* `kubectl get pods -l app=v1` query with new label
+* `kubectl delete service -l run=kubernetes-bootcamp` delete service
+* `kubectl get services` see NodePort service no longer available
+* `curl $(minikube ip):$NODE_PORT` failed to connect (since it no longer exists)
+* `kubectl exec -ti $POD_NAME curl localhost:8080` confirm app is still running on internal cluster
+
+Further notes on k8s:
+
+When you see values "port" and "targetPort". "port" is the port on the external IP, "targetPort" is the port on the container. 
+
+`port-forward` is only a means of debugging, it is not a practical means of making containers available. 
