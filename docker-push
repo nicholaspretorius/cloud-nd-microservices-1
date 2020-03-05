@@ -3,14 +3,12 @@
 # Log into Docker Hub.
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
-# tag images
+# tag and push images
 docker tag nicholaspretorius/ncp-clound-project3-restapi-user nicholaspretorius/ncp-clound-project3-restapi-user:latest
-docker tag nicholaspretorius/ncp-clound-project3-restapi-feed nicholaspretorius/ncp-clound-project3-restapi-feed:latest
-docker tag nicholaspretorius/ncp-clound-project3-restapi-client nicholaspretorius/ncp-clound-project3-restapi-client:latest
-docker tag nicholaspretorius/ncp-clound-project3-restapi-reverseproxy nicholaspretorius/ncp-clound-project3-restapi-reverseproxy:latest
-
-# push images
 docker push nicholaspretorius/ncp-clound-project3-restapi-user:latest
+docker tag nicholaspretorius/ncp-clound-project3-restapi-feed nicholaspretorius/ncp-clound-project3-restapi-feed:latest
 docker push nicholaspretorius/ncp-clound-project3-restapi-feed:latest
+docker tag nicholaspretorius/ncp-clound-project3-restapi-client nicholaspretorius/ncp-clound-project3-restapi-client:latest
 docker push nicholaspretorius/ncp-clound-project3-restapi-client:latest
+docker tag nicholaspretorius/ncp-clound-project3-restapi-reverseproxy nicholaspretorius/ncp-clound-project3-restapi-reverseproxy:latest
 docker push nicholaspretorius/ncp-clound-project3-restapi-reverseproxy:latest
