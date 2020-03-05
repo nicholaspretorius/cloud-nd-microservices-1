@@ -17,3 +17,9 @@ before_install:
 
 install:
   - docker-compose -f docker-compose.ci.yml build --parallel
+
+deploy:
+  provider: script
+  script: bash docker-push
+  on:
+    branch: master
