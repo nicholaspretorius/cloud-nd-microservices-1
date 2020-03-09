@@ -129,7 +129,9 @@ In order to create your configmaps, deployments and services, run the following:
 * `kubectl port-forward services/reverseproxy 8080:8080`
 * `kubectl port-forward services/client 8100:8100`
 * `kubectl port-forward services/reverseproxy 8080:8080 &` to run in background, then pres `fg` to get it back into foreground
-
+* `kubectl expose deployment/reverseproxy --type="NodePort" --port 8080`
+* `kubectl set image deployments/client client=nicholaspretorius/ncp-clound-project3-restapi-client:latest`
+* `kubectl rollout status deployments/client`
 
 ### Cleanup
 
@@ -175,7 +177,7 @@ Commands to run in order to setup KubeOne on AWS infrastructure via Terraform:
 * `terraform apply`
 * `terraform output -json > tf.json`
 * `kubeone install config.yaml --tfjson tf.json`
-* `export KUBECONFIG=$PWD/project3-tf-v2-kubeconfig`
+* `export KUBECONFIG=$PWD/project3-tf-v3-kubeconfig`
 * `kubectl get machinedeployments -n kube-system`
 * `kubectl scale machinedeployment/project3-tf-v3-eu-west-1a -n kube-system --replicas=2` scale up
 * `kubectl scale machinedeployment/project3-tf-v3-eu-west-1a -n kube-system --replicas=0` scale down
@@ -223,3 +225,5 @@ Further notes on k8s:
 When you see values "port" and "targetPort". "port" is the port on the external IP, "targetPort" is the port on the container. 
 
 `port-forward` is only a means of debugging, it is not a practical means of making containers available. 
+
+

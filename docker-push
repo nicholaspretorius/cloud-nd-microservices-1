@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # Log into Docker Hub.
-echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+# echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
 # tag and push images
 # docker tag cloud-nd-microservices-1_restapi-user:latest nicholaspretorius/ncp-clound-project3-restapi-user:latest
-docker push nicholaspretorius/ncp-clound-project3-restapi-user:latest
+# docker push nicholaspretorius/ncp-clound-project3-restapi-user:latest
 # docker tag cloud-nd-microservices-1_restapi-feed:latest nicholaspretorius/ncp-clound-project3-restapi-feed:latest
 # docker push nicholaspretorius/ncp-clound-project3-restapi-feed:latest
 # docker tag cloud-nd-microservices-1_restapi-client:latest nicholaspretorius/ncp-clound-project3-restapi-client:latest
