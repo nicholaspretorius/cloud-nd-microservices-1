@@ -5,6 +5,7 @@ services:
     build:
       context: ./udacity-c3-deployment/docker
       dockerfile: Dockerfile
+    image: ncp-clound-project3-restapi-reverseproxy
     restart: always
     depends_on:
       - restapi-users
@@ -15,6 +16,7 @@ services:
     build:
       context: ./db
       dockerfile: Dockerfile
+    image: ncp-clound-project3-restapi-db
     expose:
       - 5432
     environment:
@@ -25,6 +27,7 @@ services:
     build:
       context: ./udacity-c3-restapi-user
       dockerfile: Dockerfile
+    image: ncp-clound-project3-restapi-users
     volumes:
       - "./udacity-c3-restapi-user:/usr/src/app"
       - "/usr/src/app/node_modules"
@@ -40,6 +43,7 @@ services:
     build:
       context: ./udacity-c3-restapi-feed
       dockerfile: Dockerfile
+    image: ncp-clound-project3-restapi-feed
     volumes:
       - "./udacity-c3-restapi-feed:/usr/src/app"
       - "/usr/src/app/node_modules"
@@ -55,6 +59,7 @@ services:
     build:
       context: ./udacity-c3-frontend
       dockerfile: Dockerfile
+    image: ncp-clound-project3-restapi-client
     volumes:
       - "./udacity-c3-frontend:/usr/src/app"
       - "/usr/src/app/node_modules"
