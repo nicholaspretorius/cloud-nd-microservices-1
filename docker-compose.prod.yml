@@ -41,7 +41,7 @@ services:
   client:
     build:
       context: ./udacity-c3-frontend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.prod
     volumes:
       - "./udacity-c3-frontend:/usr/src/app"
       - "/usr/src/app/node_modules"

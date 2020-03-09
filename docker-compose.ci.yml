@@ -58,7 +58,7 @@ services:
   client:
     build:
       context: ./udacity-c3-frontend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.prod
     image: ncp-clound-project3-restapi-client
     volumes:
       - $HOME/.aws:/root/.aws
