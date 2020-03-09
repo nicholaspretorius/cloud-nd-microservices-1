@@ -25,8 +25,8 @@ install:
 #     branch: master
 
 after_success:
-  - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-  - docker tag ncp-clound-project3-restapi-user $DOCKER_USER/ncp-clound-project3-restapi-user:$TRAVIS_BUILD_NUMBER
-  - docker push $DOCKER_USER/ncp-clound-project3-restapi-user:$TRAVIS_BUILD_NUMBER
+  - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+  - docker tag ncp-clound-project3-restapi-user $DOCKER_USERNAME/ncp-clound-project3-restapi-user:$TRAVIS_BUILD_NUMBER
+  - docker push $DOCKER_USERNAME/ncp-clound-project3-restapi-user:$TRAVIS_BUILD_NUMBER
   # - docker tag ncp-clound-project3-restapi-user $DOCKER_USER/ncp-clound-project3-restapi-user:latest
   # - docker push $DOCKER_USER/ncp-clound-project3-restapi-user:latest
