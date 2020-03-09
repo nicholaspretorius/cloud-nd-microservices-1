@@ -9,6 +9,7 @@ COPY package*.json ./
 RUN npm ci
 
 COPY . .
+COPY ./nginx.conf /nginx.conf
 
 # CMD ["ionic", "build"]
 RUN echo "ionic build..."
@@ -19,3 +20,4 @@ FROM nginx:alpine
 RUN echo "nginx..."
 
 COPY --from=builder /usr/src/app/www /usr/share/nginx/html
+COPY --from=builder /nginx.conf /etc/nginx/conf.d/default.conf
