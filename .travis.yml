@@ -27,6 +27,18 @@ install:
 after_success:
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
   - docker tag ncp-clound-project3-restapi-user $DOCKER_USERNAME/ncp-clound-project3-restapi-user:$TRAVIS_BUILD_NUMBER
+  - docker tag ncp-clound-project3-restapi-feed $DOCKER_USERNAME/ncp-clound-project3-restapi-feed:$TRAVIS_BUILD_NUMBER
+  - docker tag ncp-clound-project3-restapi-client $DOCKER_USERNAME/ncp-clound-project3-restapi-client:$TRAVIS_BUILD_NUMBER
+  - docker tag ncp-clound-project3-restapi-reverseproxy $DOCKER_USERNAME/ncp-clound-project3-restapi-reverseproxy:$TRAVIS_BUILD_NUMBER
   - docker push $DOCKER_USERNAME/ncp-clound-project3-restapi-user:$TRAVIS_BUILD_NUMBER
-  # - docker tag ncp-clound-project3-restapi-user $DOCKER_USER/ncp-clound-project3-restapi-user:latest
-  # - docker push $DOCKER_USER/ncp-clound-project3-restapi-user:latest
+  - docker push $DOCKER_USERNAME/ncp-clound-project3-restapi-feed:$TRAVIS_BUILD_NUMBER
+  - docker push $DOCKER_USERNAME/ncp-clound-project3-restapi-client:$TRAVIS_BUILD_NUMBER
+  - docker push $DOCKER_USERNAME/ncp-clound-project3-restapi-reverseproxy:$TRAVIS_BUILD_NUMBER
+  # - docker tag ncp-clound-project3-restapi-user $DOCKER_USERNAME/ncp-clound-project3-restapi-user:latest
+  # - docker tag ncp-clound-project3-restapi-feed $DOCKER_USERNAME/ncp-clound-project3-restapi-feed:latest
+  # - docker tag ncp-clound-project3-restapi-client $DOCKER_USERNAME/ncp-clound-project3-restapi-client:latest
+  # - docker tag ncp-clound-project3-restapi-reverseproxy $DOCKER_USERNAME/ncp-clound-project3-restapi-reverseproxy:latest
+  # - docker push $DOCKER_USERNAME/ncp-clound-project3-restapi-user:latest
+  # - docker push $DOCKER_USERNAME/ncp-clound-project3-restapi-feed:latest
+  # - docker push $DOCKER_USERNAME/ncp-clound-project3-restapi-client:latest
+  # - docker push $DOCKER_USERNAME/ncp-clound-project3-restapi-reverseproxy:latest
