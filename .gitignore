@@ -43,3 +43,9 @@ venv/
 !.elasticbeanstalk/*.global.yml
 
 instructions.md
+.terraform
+.tfstate.backup
+tf.json
+*-kubeconfig
+*.tar.gz
+terraform/terraform.tfstate
