@@ -26,7 +26,7 @@ spec:
         service: client
     spec:
       containers:
-        - image: nicholaspretorius/ncp-clound-project3-restapi-client:26
+        - image: nicholaspretorius/ncp-clound-project3-restapi-client:latest
           imagePullPolicy: Always
           name: client
           ports:
