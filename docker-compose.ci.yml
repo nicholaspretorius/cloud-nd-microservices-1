@@ -1,4 +1,4 @@
-# Travis CI version of docker-compose, does not use env_file just env vars
+#  CI version of docker-compose, does not use env_file just env vars
 version: "3.7"
 
 services:
@@ -6,6 +6,7 @@ services:
     build:
       context: ./udacity-c3-deployment/docker
       dockerfile: Dockerfile
+    image: ncp-clound-project3-restapi-reverseproxy
     restart: always
     depends_on:
       - restapi-users
@@ -16,6 +17,7 @@ services:
     build:
       context: ./udacity-c3-restapi-user
       dockerfile: Dockerfile.prod
+    image: ncp-clound-project3-restapi-user
     volumes:
       - $HOME/.aws:/root/.aws
     ports:
@@ -36,6 +38,7 @@ services:
     build:
       context: ./udacity-c3-restapi-feed
       dockerfile: Dockerfile.prod
+    image: ncp-clound-project3-restapi-feed
     volumes:
       - $HOME/.aws:/root/.aws
     ports:
@@ -56,6 +59,7 @@ services:
     build:
       context: ./udacity-c3-frontend
       dockerfile: Dockerfile
+    image: ncp-clound-project3-restapi-client
     volumes:
       - $HOME/.aws:/root/.aws
     ports:

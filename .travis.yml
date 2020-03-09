@@ -18,8 +18,15 @@ before_install:
 install:
   - docker-compose -f docker-compose.ci.yml build --parallel
 
-deploy:
-  provider: script
-  script: bash docker-push
-  on:
-    branch: master
+# deploy:
+#   provider: script
+#   script: bash docker-push
+#   on:
+#     branch: master
+
+after_success:
+  - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+  - docker tag ncp-clound-project3-restapi-user $DOCKER_USER/ncp-clound-project3-restapi-user:$TRAVIS_BUILD_NUMBER
+  - docker push $DOCKER_USER/ncp-clound-project3-restapi-user:$TRAVIS_BUILD_NUMBER
+  # - docker tag ncp-clound-project3-restapi-user $DOCKER_USER/ncp-clound-project3-restapi-user:latest
+  # - docker push $DOCKER_USER/ncp-clound-project3-restapi-user:latest
