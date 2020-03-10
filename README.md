@@ -131,7 +131,11 @@ In order to create your configmaps, deployments and services, run the following:
 * `kubectl port-forward services/reverseproxy 8080:8080 &` to run in background, then pres `fg` to get it back into foreground
 * `kubectl expose deployment/reverseproxy --type="NodePort" --port 8080`
 * `kubectl set image deployments/client client=nicholaspretorius/ncp-clound-project3-restapi-client:latest`
+* `kubectl set image deployments/restapi-users restapi-users=nicholaspretorius/ncp-clound-project3-restapi-user:latest`
+* `kubectl set image deployments/restapi-feed restapi-feed=nicholaspretorius/ncp-clound-project3-restapi-feed:latest`
 * `kubectl rollout status deployments/client`
+* `kubectl scale deployment client --replicas=0 -n service`
+* `kubectl scale deployment reverseproxy --replicas=0 -n service`
 
 ### Cleanup
 
@@ -177,7 +181,7 @@ Commands to run in order to setup KubeOne on AWS infrastructure via Terraform:
 * `terraform apply`
 * `terraform output -json > tf.json`
 * `kubeone install config.yaml --tfjson tf.json`
-* `export KUBECONFIG=$PWD/project3-tf-v3-kubeconfig`
+* `export KUBECONFIG=$PWD/project3-tf-v5-kubeconfig`
 * `kubectl get machinedeployments -n kube-system`
 * `kubectl scale machinedeployment/project3-tf-v3-eu-west-1a -n kube-system --replicas=2` scale up
 * `kubectl scale machinedeployment/project3-tf-v3-eu-west-1a -n kube-system --replicas=0` scale down
