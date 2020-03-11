@@ -9,5 +9,5 @@ data:
   DB_PROTOCOL: "postgres"
   S3_BUCKET: "ncp-cloudnd-project3"
   AWS_REGION: "eu-west-1"
-  AWS_PROFILE: "default"
+  AWS_PROFILE: "DEPLOYED"
   PORT: "8080"
