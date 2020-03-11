@@ -181,7 +181,7 @@ Commands to run in order to setup KubeOne on AWS infrastructure via Terraform:
 * `terraform apply`
 * `terraform output -json > tf.json`
 * `kubeone install config.yaml --tfjson tf.json`
-* `export KUBECONFIG=$PWD/project3-tf-v5-kubeconfig`
+* `export KUBECONFIG=$PWD/project3-tf-v6-kubeconfig`
 * `kubectl get machinedeployments -n kube-system`
 * `kubectl scale machinedeployment/project3-tf-v3-eu-west-1a -n kube-system --replicas=2` scale up
 * `kubectl scale machinedeployment/project3-tf-v3-eu-west-1a -n kube-system --replicas=0` scale down
