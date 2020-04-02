@@ -2,7 +2,47 @@
 
 [![Build Status](https://travis-ci.com/nicholaspretorius/cloud-nd-microservices-1.svg?branch=master)](https://travis-ci.com/nicholaspretorius/cloud-nd-microservices-1)
 
-Taking the Udacity Cloud Developer Nanodegree Project 2 and converting the monolith into microservices via Docker and Docker Compose. 
+### Reviewer Notes
+
+Thank you for reviewing my project!
+
+Please see below for submission details as laid out by the [Project Rubric](https://review.udacity.com/#!/rubrics/2572/view).
+
+### GitHub
+
+* `git checkout https://github.com/nicholaspretorius/cloud-nd-microservices-1.git`
+
+### DockerHub
+
+* [REST API Users](https://hub.docker.com/r/nicholaspretorius/ncp-clound-project3-restapi-user)
+* [REST API Feed](https://hub.docker.com/r/nicholaspretorius/ncp-clound-project3-restapi-feed)
+* [Reverse Proxy](https://hub.docker.com/r/nicholaspretorius/ncp-clound-project3-restapi-reverseproxy)
+* [Client](https://hub.docker.com/r/nicholaspretorius/ncp-clound-project3-restapi-client)
+
+#### Screenshots
+
+#### Travis CI Screenshot
+
+Screenshot of passing Travis CI build:
+
+![Travis CI Screenshot](/images/travis-ci-passing.png)
+
+#### kubectl Screenshot
+
+Screenshot of running pods and services from kubectl:
+
+![kubectl Screenshot](/images/kubectl-pods-services.png)
+
+#### App Screenshot
+
+Screenshot of live client app on AWS [URL](http://a8e8b3e6ab880427fa823f7970f5d8d6-1669744884.eu-west-1.elb.amazonaws.com:8100): 
+
+![App Screenshot](/images/app-screenshot.png)
+
+### Reverse Proxy AWS URL
+
+* [API URL](http://a268376d7e3ab475bb7db334f1110e9f-65389166.eu-west-1.elb.amazonaws.com:8080/api/v0)
+
 
 ### Development Notes
 
@@ -27,6 +67,7 @@ To run the "production" docker-compose file, run the following from the command-
 
 `docker-compose -f docker-compose.prod.yml up --build`
 
+### URLS
 
 You should find the different services on the following ports: 
 
@@ -34,7 +75,7 @@ You should find the different services on the following ports:
 * /feed: http://localhost:8081
 * /client: http://localhost:8100
 
-With the proxy, which the client reads, you will find them here: 
+With the nginx reverse proxy, which the client reads, you will find them here: 
 
 * /users: http://localhost:8080/api/v0/users
 * /feed: http://localhost:8080/api/v0/feed
@@ -43,7 +84,9 @@ With the proxy, which the client reads, you will find them here:
 
 Kubernetes deployments require your containers to be located in a registry, as such, you need to push your containers to a registry, such as Docker Hub, AWS ECR (Elastic Container Registry) or similar. In order to do so, you need to name your local image with the name of your registry and tag it. Then push the image to the registry. 
 
-*Note: The registry used needs to be the prefix of the tagged image, for example: registryname/imagename:tagname. This is how Docker knows which registry to push to.*
+*Note: When pushing to GitHub, Travis CI builds the images and pushes them to DockerHub. You do not need to manually push to DockerHub, the commands below are notes on how to do them manually*
+
+*Docker Repository Note: The registry used needs to be the prefix of the tagged image, for example: registryname/imagename:tagname. This is how Docker knows which registry to push to.*
 
 *Docker can push to any registry it has been logged into. You can check these registries by looking at the "auth" contents in the config.json file in `~/.Docker/config.json`.*
 
@@ -60,7 +103,6 @@ Practice:
 
 * `docker tag microservices1_restapi-user nicholaspretorius/ncp-clound-project3-restapi-user:v2`
 * `docker push nicholaspretorius/ncp-clound-project3-restapi-user:v2`
-
 * `docker tag microservices1_restapi-feed nicholaspretorius/ncp-clound-project3-restapi-feed:v2`
 * `docker push nicholaspretorius/ncp-clound-project3-restapi-feed:v2`
 * `docker tag microservices1_client nicholaspretorius/ncp-clound-project3-restapi-client:v2`
@@ -182,7 +224,7 @@ Commands to run in order to setup KubeOne on AWS infrastructure via Terraform:
 * `terraform apply`
 * `terraform output -json > tf.json`
 * `kubeone install config.yaml --tfjson tf.json`
-* `export KUBECONFIG=$PWD/project3-tf-v6-kubeconfig`
+* `export KUBECONFIG=$PWD/project3-tf-v7-kubeconfig`
 * `kubectl get machinedeployments -n kube-system`
 * `kubectl scale machinedeployment/project3-tf-v3-eu-west-1a -n kube-system --replicas=2` scale up
 * `kubectl scale machinedeployment/project3-tf-v3-eu-west-1a -n kube-system --replicas=0` scale down
@@ -227,8 +269,9 @@ Commands to run in order to setup KubeOne on AWS infrastructure via Terraform:
 
 Further notes on k8s:
 
-When you see values "port" and "targetPort". "port" is the port on the external IP, "targetPort" is the port on the container. 
-
-`port-forward` is only a means of debugging, it is not a practical means of making containers available. 
+When you see values "port" and "targetPort": 
+* "port" is the port on the external IP 
+* "targetPort" is the port on the container. 
+* `port-forward` is only a means of debugging, it is not a practical means of making containers available. 
 
 
