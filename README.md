@@ -125,23 +125,6 @@ If run correctly, you can now view your secrets as follows:
 * `kubectl get secret aws-secret -o yaml`
 * `kubectl describe secrets/aws-secret`
 
-### eksctl and kubectl
-
-To setup and run the clusters take a look at the `k8s/cluster.yaml`. 
-
-Create your secrets as follows: 
-
-1. Manually: `echo -n stringToConvert | base64`
-3. `kubectl apply -f ./aws-secret.yaml`
-2. Generate: `kubectl create secret generic aws-secret --from-literal=DB_USER='exampleuser' --from-literal=DB_PASS='examplepass' --from-literal=JWT_SECRET='examplesecret'`
-
-Alternately, you can run from a file as follows: `kubectl create secret generic aws-secret --from-file=./AWS_USERNAME --from-file=./AWS_PASSWORD `
-
-If run correctly, you can now view your secrets as follows: 
-
-* `kubectl get secret aws-secret -o yaml`
-* `kubectl describe secrets/aws-secret`
-
 ### Travis CI
 
 Travis CI will build once a push to GitHub has happened. If you want to skip a CI build, i.e. for updates to files that do not impact build, then you can commit as follows: 
