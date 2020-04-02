@@ -39,20 +39,17 @@ Screenshot of live client app on AWS [URL](http://a8e8b3e6ab880427fa823f7970f5d8
 
 ![App Screenshot](/images/app-screenshot.png)
 
-### Reverse Proxy AWS URL
-
-* [API URL](http://a268376d7e3ab475bb7db334f1110e9f-65389166.eu-west-1.elb.amazonaws.com:8080/api/v0)
-
 
 ### Development Notes
 
-To run the application, from the command line, run: 
+This application uses Docker for development. 
+
+To run the development application, from the command line, run: 
 * `docker-compose up --build` to run the apps
 * `docker ps` to see running containers, note the name of the container you want to access
 * `docker exec -it microservices1_client_1 bash` to access bash on client service
 * `curl http://localhost:8100` to get what is running on localhost:8100 in that container
 * `exit` to exit bash on the running container
-* `docker-compose down` to stop the apps
 * `docker-compose exec users-feed-db psql -U postgres` to connect to the DB via PSQL
 * `\l` to list the databases
 * `\c db` to connect to the database
@@ -60,10 +57,11 @@ To run the application, from the command line, run:
 * `SELECT * FROM "User";` will return all values in the Users table, there should not be any
 * `SELECT * FROM "FeedItem";` will return all values in the FeedItem table, there should not be any
 * `DELETE FROM "FeedItem";` to delete all items in FeedItem
+* `docker-compose down` to stop the apps
 
 ### Production docker-compose
 
-To run the "production" docker-compose file, run the following from the command-line: 
+To run the "production" docker-compose file (which uses an AWS RDS) as well as the AWS URL (instead of the local API), run the following from the command-line: 
 
 `docker-compose -f docker-compose.prod.yml up --build`
 
@@ -84,7 +82,7 @@ With the nginx reverse proxy, which the client reads, you will find them here:
 
 Kubernetes deployments require your containers to be located in a registry, as such, you need to push your containers to a registry, such as Docker Hub, AWS ECR (Elastic Container Registry) or similar. In order to do so, you need to name your local image with the name of your registry and tag it. Then push the image to the registry. 
 
-*Note: When pushing to GitHub, Travis CI builds the images and pushes them to DockerHub. You do not need to manually push to DockerHub, the commands below are notes on how to do them manually*
+*Note: When pushing to GitHub, Travis CI builds the images and pushes them to DockerHub. You do not need to manually push to DockerHub, the commands below are notes on how to do them manually for information purposes.*
 
 *Docker Repository Note: The registry used needs to be the prefix of the tagged image, for example: registryname/imagename:tagname. This is how Docker knows which registry to push to.*
 
@@ -110,6 +108,22 @@ Practice:
 * `docker tag microservices1_reverseproxy nicholaspretorius/ncp-clound-project3-restapi-reverseproxy:v2`
 * `docker push nicholaspretorius/ncp-clound-project3-restapi-reverseproxy:v2`
 
+### kubectl
+
+Check your kubectl version: `kubectl version`
+
+Create your secrets as follows: 
+
+1. Manually: `echo -n stringToConvert | base64`
+3. `kubectl apply -f ./aws-secret.yaml`
+2. Generate: `kubectl create secret generic aws-secret --from-literal=DB_USER='exampleuser' --from-literal=DB_PASS='examplepass' --from-literal=JWT_SECRET='examplesecret'`
+
+Alternately, you can run from a file as follows: `kubectl create secret generic aws-secret --from-file=./AWS_USERNAME --from-file=./AWS_PASSWORD `
+
+If run correctly, you can now view your secrets as follows: 
+
+* `kubectl get secret aws-secret -o yaml`
+* `kubectl describe secrets/aws-secret`
 
 ### eksctl and kubectl
 
@@ -128,70 +142,6 @@ If run correctly, you can now view your secrets as follows:
 * `kubectl get secret aws-secret -o yaml`
 * `kubectl describe secrets/aws-secret`
 
-Then run: 
-
-* `eksctl version`
-* `kubectl version`
-* `kubectl get secrets`
-* `kubectl delete secrets env-secret.yaml`
-* `eksctl create cluster -f cluster.yaml`
-* `eksctl create cluster --name ncp-cloudnd-project3-v6`
-* `eksctl utils update-cluster-logging --region=eu-west-1 --cluster=microservices1-cluster2`
-* `eksctl create cluster --name=eksworkshop-eksctl --nodes=3 --managed --alb-ingress-access --region=${AWS_REGION}`
-* `kubectl cluster-info`
-* `kubectl config view`
-* `eksctl delete cluster --name=ncp-cloudnd-project3-v6`
-* `kubectl get nodes`
-* `kubectl get service client -o wide`
-
-In order to create your configmaps, deployments and services, run the following: 
-
-* `kubectl apply -f ./udacity-c3-deployment/k8s/env-configmap.yaml`
-* `kubectl get configmaps`
-* `kubectl apply -f ./udacity-c3-deployment/k8s/users.deployment.yaml`
-* `kubectl get deploy`
-* `kubectl get pods`
-* `kubectl describe pods podnamehere`
-* `kubectl logs podname-7bdc944cdb-kn9wv`
-* `kubectl apply -f ./udacity-c3-deployment/k8s/feed.deployment.yaml`
-* `kubectl apply -f ./udacity-c3-deployment/k8s/client.deployment.yaml`
-* `kubectl apply -f ./udacity-c3-deployment/k8s/reverseproxy.deployment.yaml`
-* `kubectl apply -f ./udacity-c3-deployment/k8s/users.service.yaml`
-* `kubectl apply -f ./udacity-c3-deployment/k8s/feed.service.yaml`
-* `kubectl apply -f ./udacity-c3-deployment/k8s/client.service.yaml`
-* `kubectl apply -f ./udacity-c3-deployment/k8s/reverseproxy.service.yaml`
-* `kubectl convert -f ./udacity-c3-deployment/k8s/users.deployment.yaml --output-version apps/v1`
-* `kubectl convert -f ./udacity-c3-deployment/k8s/feed.deployment.yaml --output-version apps/v1`
-* `kubectl convert -f ./udacity-c3-deployment/k8s/client.deployment.yaml --output-version apps/v1`
-* `kubectl convert -f ./udacity-c3-deployment/k8s/reverseproxy.deployment.yaml --output-version apps/v1`
-* `kubectl get services`
-* `kubectl get pods`
-* `kubectl get pods -o wide`
-* `kubectl get pods reverseproxy-7bdc944cdb-s7d4n --template='{{(index (index .spec.containers 0).ports 0).containerPort}}{{"\n"}}'`
-* `kubectl get rs`
-* `kubectl port-forward services/reverseproxy 8080:8080`
-* `kubectl port-forward services/client 8100:8100`
-* `kubectl port-forward services/reverseproxy 8080:8080 &` to run in background, then pres `fg` to get it back into foreground
-* `kubectl expose deployment/reverseproxy --type="NodePort" --port 8080`
-* `kubectl set image deployments/client client=nicholaspretorius/ncp-clound-project3-restapi-client:latest`
-* `kubectl set image deployments/restapi-users restapi-users=nicholaspretorius/ncp-clound-project3-restapi-user:latest`
-* `kubectl set image deployments/restapi-feed restapi-feed=nicholaspretorius/ncp-clound-project3-restapi-feed:latest`
-* `kubectl rollout status deployments/client`
-* `kubectl scale deployment client --replicas=0 -n service`
-* `kubectl scale deployment reverseproxy --replicas=0 -n service`
-
-### Cleanup
-
-To delete everything you can run: 
-
-* `eksctl delete cluster --name=name-here`
-
-Then run through all the deployments and service deletions as follows: 
-
-* `kubectl delete -f ./udacity-c3-deployment/k8s/users.service.yaml`
-* `kubectl delete -f ./udacity-c3-deployment/k8s/users.deployment.yaml`
-
-
 ### Travis CI
 
 Travis CI will build once a push to GitHub has happened. If you want to skip a CI build, i.e. for updates to files that do not impact build, then you can commit as follows: 
@@ -201,6 +151,8 @@ Travis CI will build once a push to GitHub has happened. If you want to skip a C
 Note the use of the `[skip ci]` indicator in the Git commit message. 
 
 ### Terraform
+
+The application uses Terraform to provision AWS infrastructure and then uses kubectl to to run the containers.
 
 There is a terraform folder containing Terraform variables, specifically, pay attention to `terraform.tfvars` and modify where appropriate. 
 
@@ -225,17 +177,97 @@ Commands to run in order to setup KubeOne on AWS infrastructure via Terraform:
 * `terraform output -json > tf.json`
 * `kubeone install config.yaml --tfjson tf.json`
 * `export KUBECONFIG=$PWD/project3-tf-v7-kubeconfig`
+
+In order to create your configmaps, deployments and services, run the following: 
+
+Make sure to first create deployments for feed and users, wait for them to be up and running and then create services for feed and users. Only once these are all complete, do you create the deployment for the reverseproxy, the service for reverseproxy and finally, the deployment and service for client. 
+
+* `kubectl apply -f ./udacity-c3-deployment/k8s/env-configmap.yaml`
+* `kubectl get configmaps`
+* `kubectl apply -f ./udacity-c3-deployment/k8s/users.deployment.yaml`
+* `kubectl get deploy`
+* `kubectl get pods`
+* `kubectl describe pods podnamehere`
+* `kubectl logs podname-7bdc944cdb-kn9wv`
+
+Create rest of deployments:
+
+* `kubectl apply -f ./udacity-c3-deployment/k8s/feed.deployment.yaml`
+* `kubectl apply -f ./udacity-c3-deployment/k8s/client.deployment.yaml`
+* `kubectl apply -f ./udacity-c3-deployment/k8s/reverseproxy.deployment.yaml`
+* `kubectl apply -f ./udacity-c3-deployment/k8s/users.service.yaml`
+* `kubectl apply -f ./udacity-c3-deployment/k8s/feed.service.yaml`
+* `kubectl apply -f ./udacity-c3-deployment/k8s/client.service.yaml`
+* `kubectl apply -f ./udacity-c3-deployment/k8s/reverseproxy.service.yaml`
+
+
 * `kubectl get machinedeployments -n kube-system`
 * `kubectl scale machinedeployment/project3-tf-v3-eu-west-1a -n kube-system --replicas=2` scale up
 * `kubectl scale machinedeployment/project3-tf-v3-eu-west-1a -n kube-system --replicas=0` scale down
 * `kubeone reset ./terraform/config.yaml --tfjson ./terraform/tf.json`
 * `terraform destroy`
+
+If you need to convert the format of your deployments due to API version errors: 
+
+* `kubectl convert -f ./udacity-c3-deployment/k8s/users.deployment.yaml --output-version apps/v1`
+* `kubectl convert -f ./udacity-c3-deployment/k8s/feed.deployment.yaml --output-version apps/v1`
+* `kubectl convert -f ./udacity-c3-deployment/k8s/client.deployment.yaml --output-version apps/v1`
+* `kubectl convert -f ./udacity-c3-deployment/k8s/reverseproxy.deployment.yaml --output-version apps/v1` 
 * `kubectl convert -f ./udacity-c3-deployment/k8s/users.deployment.yaml --output-version apps/v1`
 * `kubectl convert -f ./udacity-c3-deployment/k8s/feed.deployment.yaml --output-version apps/v1`
 * `kubectl convert -f ./udacity-c3-deployment/k8s/client.deployment.yaml --output-version apps/v1`
 * `kubectl convert -f ./udacity-c3-deployment/k8s/reverseproxy.deployment.yaml --output-version apps/v1`
 
-### k8s Tutorial
+### Other
+
+Below are more useful commands: 
+
+* `kubectl get services`
+* `kubectl get pods`
+* `kubectl get pods -o wide`
+* `kubectl get pods reverseproxy-7bdc944cdb-s7d4n --template='{{(index (index .spec.containers 0).ports 0).containerPort}}{{"\n"}}'`
+* `kubectl get rs`
+* `kubectl port-forward services/reverseproxy 8080:8080`
+* `kubectl port-forward services/client 8100:8100`
+* `kubectl port-forward services/reverseproxy 8080:8080 &` to run in background, then pres `fg` to get it back into foreground
+* `kubectl expose deployment/reverseproxy --type="NodePort" --port 8080`
+* `kubectl set image deployments/client client=nicholaspretorius/ncp-clound-project3-restapi-client:latest`
+* `kubectl set image deployments/restapi-users restapi-users=nicholaspretorius/ncp-clound-project3-restapi-user:latest`
+* `kubectl set image deployments/restapi-feed restapi-feed=nicholaspretorius/ncp-clound-project3-restapi-feed:latest`
+* `kubectl rollout status deployments/client`
+* `kubectl scale deployment client --replicas=0 -n service`
+* `kubectl scale deployment reverseproxy --replicas=0 -n service`
+
+### eksctl and kubectl
+
+This project does not currently use eksctl, but during development, it was experimented with, these notes are only for reference. 
+
+* `eksctl version`
+* `kubectl version`
+* `kubectl get secrets`
+* `kubectl delete secrets env-secret.yaml`
+* `eksctl create cluster -f cluster.yaml`
+* `eksctl create cluster --name ncp-cloudnd-project3-v6`
+* `eksctl utils update-cluster-logging --region=eu-west-1 --cluster=microservices1-cluster2`
+* `eksctl create cluster --name=eksworkshop-eksctl --nodes=3 --managed --alb-ingress-access --region=${AWS_REGION}`
+* `kubectl cluster-info`
+* `kubectl config view`
+* `eksctl delete cluster --name=ncp-cloudnd-project3-v6`
+* `kubectl get nodes`
+* `kubectl get service client -o wide`
+
+### Cleanup
+
+To delete everything you can run: 
+
+* `eksctl delete cluster --name=name-here`
+
+Then run through all the deployments and service deletions as follows: 
+
+* `kubectl delete -f ./udacity-c3-deployment/k8s/users.service.yaml`
+* `kubectl delete -f ./udacity-c3-deployment/k8s/users.deployment.yaml`   
+
+### Miscellaneous Notes and k8s Tutorial Notes
 
 * `kubectl set image deployments/kubernetes-bootcamp kubernetes-bootcamp=jocatalin/kubernetes-bootcamp:v2`
 * `kubectl describe services/kubernetes-bootcamp`
