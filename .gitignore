@@ -49,3 +49,5 @@ tf.json
 *-kubeconfig
 *.tar.gz
 terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+*/Dockerfile.alt
