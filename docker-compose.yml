@@ -47,6 +47,7 @@ services:
     volumes:
       - "./udacity-c3-restapi-feed:/usr/src/app"
       - "/usr/src/app/node_modules"
+      - "~/.aws/:/root/.aws:ro"
     ports:
       - 8081:8080
     env_file:
