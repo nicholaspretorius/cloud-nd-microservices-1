@@ -19,6 +19,7 @@ To run the application, from the command line, run:
 * `\dt` to list the relations, you should see tables for `User` and `FeedItem`
 * `SELECT * FROM "User";` will return all values in the Users table, there should not be any
 * `SELECT * FROM "FeedItem";` will return all values in the FeedItem table, there should not be any
+* `DELETE FROM "FeedItem";` to delete all items in FeedItem
 
 ### Production docker-compose
 
