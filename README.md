@@ -148,6 +148,8 @@ You need an SSH key to successfully run the Terraform commands. Take a look here
 * `eval "$(ssh-agent -s)"` start SSH agent in background
 * `ssh-add -K ~/.ssh/id_rsa` Add SSH key to ssh-agent and store passphrase in keychain
 
+You will need to run these SSH commands every time you have a new terminal session and want to interact with the cluster. 
+
 Commands to run in order to setup KubeOne on AWS infrastructure via Terraform: 
 
 * `terraform version` check Terraform version
@@ -189,6 +191,8 @@ Create rest of deployments:
 * `kubectl scale machinedeployment/project3-tf-v3-eu-west-1a -n kube-system --replicas=0` scale down
 * `kubeone reset ./terraform/config.yaml --tfjson ./terraform/tf.json`
 * `terraform destroy`
+
+Make sure to check your AWS resources afterwards, chances are, not everything will be deleted and you need to be sure the resources are gone!
 
 If you need to convert the format of your deployments due to API version errors: 
 
